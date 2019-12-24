@@ -10,6 +10,11 @@ const adminController = require('./controllers/admin_controller');
 const productsController = require('./controllers/products_controller');
 const PORT = process.env.PORT || 5000;
 
+app.use(
+    bodyParser.urlencoded({
+      extended: false
+    })
+  );
 app.use(bodyParser.json());
 mongoose.connect(process.env.MONGO_URI,{useNewUrlParser:true},(err)=>{
     if(err){
@@ -37,6 +42,8 @@ setTimeout(()=>{
     //Remove a item from the cart.
     // Use request parameter to remove item from cart since you are looking a specific item in cart.
     app.delete('/api/user-data/cart/:id', userController.removeFromCart);
+    //User Register to place order
+    app.post('/api/register', userController.register)
     //When user login
     app.post('/api/login', userController.login);
     //When the user logouts

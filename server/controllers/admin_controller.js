@@ -21,8 +21,7 @@ module.exports = {
             price
         });
 
-        newProduct.save()
-        .then(()=>{res.status(200).json({Product:newProduct})})
+        newProduct.save().then((result)=>{res.status(200).json({Product:result})})
         .catch((err) => {console.log('Product save err---------:',err)})
 
     },
@@ -47,7 +46,8 @@ module.exports = {
             if(err){
                 console.log('Delete Product err---------:',err);
             }
-            res.status(200).json({product});
+            else
+            res.status(200).json({seccess:true,product});
         })
 
     }
